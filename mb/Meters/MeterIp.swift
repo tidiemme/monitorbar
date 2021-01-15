@@ -61,7 +61,7 @@ class MeterIp  : Meter {
         
         containerWidth = minContainerWidth
         if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
-            containerWidth += Double(max(textIp.size().width,textWifi.size().width))
+            containerWidth += MenuBarSettings.spacing + Double(max(textIp.size().width,textWifi.size().width))
         }
     }
     
