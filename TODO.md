@@ -1,0 +1,4 @@
+ - runtime switch between modes
+ - config file
+ - get cpu temp
+ - get gpu info
