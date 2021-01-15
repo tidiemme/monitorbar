@@ -8,4 +8,4 @@ Airline inspired monitor bar for MacOs.
  - runtime switch between modes
  - config file
  - get cpu temp
- - get gou info
+ - get gpu info
