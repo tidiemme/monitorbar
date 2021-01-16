@@ -60,7 +60,7 @@ class MeterIp  : Meter {
         textWifi.mutableString.setString(wifi)
         
         containerWidth = minContainerWidth
-        if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+        if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
             containerWidth += MenuBarSettings.spacing + Double(max(textIp.size().width,textWifi.size().width))
         }
     }
@@ -74,7 +74,7 @@ class MeterIp  : Meter {
                      ,color)
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
         drawWifiIcon(currentPos, signal, colorDark)
-        if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+        if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
             currentPos += 18.0 + MenuBarSettings.spacing
             textIp.draw(at: NSPoint(x: currentPos, y: 0.5))
             textWifi.draw(at: NSPoint(x: currentPos, y: 8.0))

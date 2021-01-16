@@ -24,7 +24,7 @@ class MeterBattery : Meter {
         
         minContainerWidth += MenuBarSettings.circleIconWidth
         
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += MenuBarSettings.spacing
         } else {
             minContainerWidth += MenuBarSettings.spacingCompact
@@ -37,7 +37,7 @@ class MeterBattery : Meter {
         charged = currentCapacity == 100
         text.mutableString.setString(String(format: "%.d", currentCapacity))
         containerWidth = minContainerWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             containerWidth += Double(text.size().width)
                             + MenuBar.charPercentageWidth
         }
@@ -67,7 +67,7 @@ class MeterBattery : Meter {
                                 ,endAngle: 360)
             batteryCircle.fill()
         }
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             currentPos += MenuBarSettings.circleIconWidth + MenuBarSettings.spacing
             text.draw(at: NSPoint(x: currentPos, y: MenuBarSettings.textY))
             currentPos += Double(text.size().width)

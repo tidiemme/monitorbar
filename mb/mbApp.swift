@@ -75,6 +75,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                           ,configuration: conf)
     }
     
+    @objc func compact(_ sender: Any) {
+        AppDelegate.setMode(1)
+    }
+    
+    @objc func normal(_ sender: Any) {
+        AppDelegate.setMode(2)
+    }
+    
+    @objc func extra(_ sender: Any) {
+        AppDelegate.setMode(3)
+    }
+    
+    static func setMode(_ mode : Int) {
+        MenuBarSettings.mode = mode
+        UserDefaults.standard.set(mode, forKey: "Mode")
+        AppDelegate.menuBar.reset()
+        AppDelegate.menuBar.update()
+    }
+    
     /*
     @objc private func showPopover(_ sender: AnyObject?) {
         if let button = AppDelegate.menuBar.statusItem?.button {

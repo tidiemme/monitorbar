@@ -24,10 +24,10 @@ class MeterDisk  : Meter {
         
         super.init()
         minContainerWidth += MenuBarSettings.circleIconWidth
-        if (MenuBarSettings.mode == MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode == MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += MenuBarSettings.spacingCompact
         } else {
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.normal) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.normal.rawValue) {
                 minContainerWidth += MenuBar.charPercentageWidth
                                    + MenuBarSettings.spacing
             } else {
@@ -51,9 +51,9 @@ class MeterDisk  : Meter {
         }
         
         containerWidth = minContainerWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             containerWidth += Double(textPercentage.size().width)
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
                 containerWidth += max(Double(textTot.size().width),Double(textFree.size().width))
             }
         }
@@ -70,12 +70,12 @@ class MeterDisk  : Meter {
         drawCircleIcon(currentPos, MenuBarSettings.circleIconWidth, MenuBarSettings.circleIconHeight
                       ,Double(diskUsage), colorDark)
         
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             currentPos += MenuBarSettings.circleIconWidth + MenuBarSettings.spacing
             textPercentage.draw(at: NSPoint(x: currentPos, y: MenuBarSettings.textY))
             currentPos += Double(textPercentage.size().width)
             MenuBar.charPercentage.draw(at: NSPoint(x: currentPos, y: MenuBarSettings.percentageY))
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
                 currentPos += MenuBar.charPercentageWidth + MenuBarSettings.spacing
                 textTot.draw(at: NSPoint(x: currentPos, y: 8.0))
                 textFree.draw(at: NSPoint(x: currentPos, y: 0.5))

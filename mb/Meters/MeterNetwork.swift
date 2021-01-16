@@ -30,7 +30,7 @@ class MeterNetwork  : Meter {
         super.init()
         
         minContainerWidth += MenuBarSettings.netIconWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += MenuBarSettings.spacing + textSize
         }
         containerWidth = minContainerWidth
@@ -85,7 +85,7 @@ class MeterNetwork  : Meter {
             colorDark.set()
         }
         downIcon.fill()
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             currentPos += MenuBarSettings.netIconWidth + MenuBarSettings.spacing
             textUp.draw(at: NSPoint(x: currentPos + textSize - Double(textUp.size().width), y: 8.0))
             textDown.draw(at: NSPoint(x: currentPos + textSize - Double(textDown.size().width), y: 0.5))

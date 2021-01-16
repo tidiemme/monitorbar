@@ -20,7 +20,7 @@ class MeterCpu  : Meter {
         cpuCount = Monitor.cpuCount()
         let cpuIconsWidth = (Double(cpuCount) * MenuBarSettings.cpuBarWidth) + ((Double(cpuCount) - 1))
         super.init()
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += cpuIconsWidth
                                + MenuBarSettings.spacing
                                + MenuBar.charPercentageWidth
@@ -33,7 +33,7 @@ class MeterCpu  : Meter {
         (cpus, cpuUsage) = monitor.cpuUsage()
         text.mutableString.setString(String(format: "%.0f", cpuUsage))
         containerWidth = minContainerWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             containerWidth += Double(text.size().width)
         }
     }
@@ -48,7 +48,7 @@ class MeterCpu  : Meter {
         
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
             
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             for cpu in cpus {
                 if cpu >= 0.0 {
                     let cpuBarR = NSRect(x: currentPos, y: MenuBarSettings.cpuBarY

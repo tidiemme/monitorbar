@@ -35,9 +35,13 @@ class MenuBarSettings {
         case extra = 3
     }
 
-    static let mode = Mode.normal
+    static var mode = 2
     
     func initialise() {
+        MenuBarSettings.mode = UserDefaults.standard.integer(forKey: "Mode")
+        if MenuBarSettings.mode < 1 {
+           MenuBarSettings.mode = 2 // default to normal
+        }
         MenuBarSettings.dateFormatter.dateFormat = "E d MMM HH:mm"
         
         let smallSize = NSAttributedString(string: String(format: "000 KB/s")

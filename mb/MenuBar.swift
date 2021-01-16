@@ -27,8 +27,17 @@ class MenuBar {
     static var charPercentageWidth = 0.0
     
     init(){
+        settings.initialise()
         MenuBar.charPercentageWidth = Double(MenuBar.charPercentage.size().width)
-        
+        ip = MeterIp()
+        network = MeterNetwork()
+        cpu = MeterCpu()
+        mem = MeterMemory()
+        disk = MeterDisk()
+        battery = MeterBattery()
+    }
+    
+    func reset() {
         ip = MeterIp()
         network = MeterNetwork()
         cpu = MeterCpu()
@@ -38,16 +47,22 @@ class MenuBar {
     }
     
     func initialise() {
-        settings.initialise()
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        menu = NSMenu()
         
+        menu = NSMenu()
         //let menuSettings = NSMenuItem()
         //menuSettings.title = "Settings"
         //menuSettings.submenu = NSMenu(title: "Settings")
         //menuSettings.submenu?.items = [NSMenuItem(title: "Compact"
         //                               ,action: #selector(AppDelegate.appMonitorClicked(_:)), keyEquivalent: "s")]
         //menu.addItem(menuSettings)
+        menu.addItem(NSMenuItem(title: "Compact"
+                    ,action: #selector(AppDelegate.compact(_:)), keyEquivalent: "c"))
+        menu.addItem(NSMenuItem(title: "Normal"
+                    ,action: #selector(AppDelegate.normal(_:)), keyEquivalent: "n"))
+        menu.addItem(NSMenuItem(title: "Extra"
+                    ,action: #selector(AppDelegate.extra(_:)), keyEquivalent: "e"))
+        
         menu.addItem(NSMenuItem(title: "Activity Monitor"
                     ,action: #selector(AppDelegate.appMonitorClicked(_:)), keyEquivalent: "a"))
         menu.addItem(NSMenuItem(title: "Quit"

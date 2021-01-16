@@ -32,8 +32,8 @@ class MeterMemory  : Meter {
         super.init()
         
         minContainerWidth += MenuBarSettings.circleIconWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.normal) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.normal.rawValue) {
                 minContainerWidth += MenuBarSettings.spacing
                                    + MenuBar.charPercentageWidth
             } else {
@@ -53,9 +53,9 @@ class MeterMemory  : Meter {
         textCached.mutableString.setString(String(format: "%.2f GB", cached / Unit.gigabyte.rawValue))
         
         containerWidth = minContainerWidth
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             containerWidth += Double(textPercentage.size().width)
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
                 containerWidth += max(Double(textUsed.size().width),Double(textCached.size().width))
             }
         }
@@ -72,12 +72,12 @@ class MeterMemory  : Meter {
         drawCircleIcon(currentPos, MenuBarSettings.circleIconWidth, MenuBarSettings.circleIconHeight
                       ,Double(memUsage), colorDark)
         
-        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact) {
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             currentPos += MenuBarSettings.circleIconWidth + MenuBarSettings.spacing
             textPercentage.draw(at: NSPoint(x: currentPos, y: MenuBarSettings.textY))
             currentPos += Double(textPercentage.size().width)
             MenuBar.charPercentage.draw(at: NSPoint(x: currentPos, y: MenuBarSettings.percentageY))
-            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra) {
+            if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
                 currentPos += MenuBar.charPercentageWidth + MenuBarSettings.spacing
                 textUsed.draw(at: NSPoint(x: currentPos, y: 8.0))
                 textCached.draw(at: NSPoint(x: currentPos, y: 0.5))
