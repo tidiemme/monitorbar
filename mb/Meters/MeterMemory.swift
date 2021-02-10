@@ -61,16 +61,16 @@ class MeterMemory  : Meter {
         }
     }
     
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor) {
+    func draw(_ pos : Double, _ color : [Double]) {
         var currentPos = pos
         drawContainer(currentPos
                      ,containerWidth
                      ,MenuBarSettings.menubarHeight
                      ,MenuBarSettings.menubarHalfHeight
-                     ,color)
+                     ,getColor(color))
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
         drawCircleIcon(currentPos, MenuBarSettings.circleIconWidth, MenuBarSettings.circleIconHeight
-                      ,Double(memUsage), colorDark)
+                      ,Double(memUsage), getColorDark(color))
         
         if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             currentPos += MenuBarSettings.circleIconWidth + MenuBarSettings.spacing

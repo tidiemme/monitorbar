@@ -87,6 +87,7 @@ class MenuBar {
                     + disk.containerWidth
                     + battery.containerWidth
                     - (MenuBarSettings.arrowWidth * 5.0)
+                    + (MenuBarSettings.itemsSpacing * 5.0)
         
         let mbHeight = MenuBarSettings.menubarHeight
         
@@ -94,17 +95,17 @@ class MenuBar {
         image.lockFocus()
         
         var pos = 0.0
-        ip.draw(pos, Color.pomegranate, Color.pomegranateDark)
-        pos += ip.containerWidth - MenuBarSettings.arrowWidth
-        network.draw(pos, Color.punpkin, Color.punpkinDark)
-        pos += network.containerWidth - MenuBarSettings.arrowWidth
-        cpu.draw(pos, Color.orange, Color.orangeDark)
-        pos += cpu.containerWidth - MenuBarSettings.arrowWidth
-        mem.draw(pos, Color.green, Color.greenDark)
-        pos += mem.containerWidth - MenuBarSettings.arrowWidth
-        disk.draw(pos, Color.blue, Color.blueDark)
-        pos += disk.containerWidth - MenuBarSettings.arrowWidth
-        battery.draw(pos, Color.purple, Color.purpleDark)
+        ip.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][0])
+        pos += ip.containerWidth - MenuBarSettings.arrowWidth + MenuBarSettings.itemsSpacing
+        network.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][1])
+        pos += network.containerWidth - MenuBarSettings.arrowWidth + MenuBarSettings.itemsSpacing
+        cpu.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][2])
+        pos += cpu.containerWidth - MenuBarSettings.arrowWidth + MenuBarSettings.itemsSpacing
+        mem.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][3])
+        pos += mem.containerWidth - MenuBarSettings.arrowWidth + MenuBarSettings.itemsSpacing
+        disk.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][4])
+        pos += disk.containerWidth - MenuBarSettings.arrowWidth + MenuBarSettings.itemsSpacing
+        battery.draw(pos, MenuBarSettings.themes[MenuBarSettings.theme][5])
         
         image.unlockFocus()
         statusItem?.button?.image = image

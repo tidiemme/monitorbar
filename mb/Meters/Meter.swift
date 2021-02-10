@@ -9,7 +9,7 @@ import SwiftUI
 
 protocol MeterProtocol {
     func update(_ monitor : Monitor)
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor)
+    func draw(_ pos : Double , _ color : [Double])
 }
 
 class MeterClass {
@@ -24,4 +24,4 @@ class MeterClass {
     }
 }
 
-typealias Meter = MeterProtocol & MeterClass
+typealias Meter = MeterClass & MeterProtocol

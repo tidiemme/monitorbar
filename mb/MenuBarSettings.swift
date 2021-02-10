@@ -29,6 +29,12 @@ class MenuBarSettings {
     static var smallStringMaxSize = 0.0
     static var normalStringMaxSize = 0.0
     
+    
+    static var themes = [ThemePalette, ThemeBlue, ThemeVerde]
+
+    static var theme = 0
+    static var itemsSpacing = 1.0
+    
     enum Mode : Int {
         case compact = 1
         case normal = 2

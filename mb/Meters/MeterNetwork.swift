@@ -55,13 +55,14 @@ class MeterNetwork  : Meter {
         textDown.mutableString.setString(String(format: "%.0f ", downBandwidth.value) + downBandwidth.unit.rawValue + "/s")
     }
     
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor) {
+    func draw(_ pos : Double, _ color : [Double]) {
         var currentPos = pos
         drawContainer(currentPos
                      ,containerWidth
                      ,MenuBarSettings.menubarHeight
                      ,MenuBarSettings.menubarHalfHeight
-                     ,color)
+                     ,getColor(color))
+        let colorDark = getColorDark(color)
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
         let upIcon = NSBezierPath()
         upIcon.move(to: CGPoint(x: currentPos, y: 10.0))

@@ -18,7 +18,7 @@ class MeterCpu  : Meter {
                                         ,attributes: StringAttribute.normal)
         cpuUsage = 0.0
         cpuCount = Monitor.cpuCount()
-        let cpuIconsWidth = (Double(cpuCount) * MenuBarSettings.cpuBarWidth) + ((Double(cpuCount) - 1))
+        let cpuIconsWidth = (Double(cpuCount) * MenuBarSettings.cpuBarWidth) + ((Double(cpuCount - 1)))
         super.init()
         if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += cpuIconsWidth
@@ -38,14 +38,15 @@ class MeterCpu  : Meter {
         }
     }
     
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor) {
+    func draw(_ pos : Double, _ color : [Double]) {
         var currentPos = pos
         drawContainer(currentPos
                      ,containerWidth
                      ,MenuBarSettings.menubarHeight
                      ,MenuBarSettings.menubarHalfHeight
-                     ,color)
+                     ,getColor(color))
         
+        let colorDark = getColorDark(color)
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
             
         if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
@@ -63,7 +64,7 @@ class MeterCpu  : Meter {
                     let roundedCpuBar = NSBezierPath(roundedRect: cpuBar, xRadius: 0.1, yRadius: 0.1)
                     NSColor.white.set()
                     roundedCpuBar.fill()
-                    currentPos += MenuBarSettings.cpuBarWidth + 1.0
+                    currentPos += MenuBarSettings.cpuBarWidth + 0.9
                 }
             }
             currentPos += MenuBarSettings.cpuBarWidth

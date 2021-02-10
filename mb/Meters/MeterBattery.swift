@@ -43,17 +43,17 @@ class MeterBattery : Meter {
         }
     }
     
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor) {
+    func draw(_ pos : Double, _ color : [Double]) {
         var currentPos = pos
         drawContainer(currentPos
                      ,containerWidth
                      ,MenuBarSettings.menubarHeight
                      ,MenuBarSettings.menubarHalfHeight
-                     ,color)
+                     ,getColor(color))
         
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
         drawCircleIcon(currentPos, MenuBarSettings.circleIconWidth, MenuBarSettings.circleIconHeight
-                      ,Double(currentCapacity) / 100.0, colorDark)
+                      ,Double(currentCapacity) / 100.0, getColorDark(color))
         if plugged {
             if charged {
                 NSColor.white.set()

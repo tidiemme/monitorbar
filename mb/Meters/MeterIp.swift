@@ -65,15 +65,15 @@ class MeterIp  : Meter {
         }
     }
     
-    func draw(_ pos : Double, _ color : NSColor, _ colorDark : NSColor) {
+    func draw(_ pos : Double, _ color : [Double]) {
         var currentPos = pos
         drawContainer(currentPos
                      ,containerWidth
                      ,MenuBarSettings.menubarHeight
                      ,MenuBarSettings.menubarHalfHeight
-                     ,color)
+                     ,getColor(color))
         currentPos += MenuBarSettings.arrowWidth + MenuBarSettings.spacing
-        drawWifiIcon(currentPos, signal, colorDark)
+        drawWifiIcon(currentPos, signal, getColorDark(color))
         if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
             currentPos += 18.0 + MenuBarSettings.spacing
             textIp.draw(at: NSPoint(x: currentPos, y: 0.5))
