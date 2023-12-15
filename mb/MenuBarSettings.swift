@@ -29,9 +29,9 @@ class MenuBarSettings {
     static var smallStringMaxSize = 0.0
     static var normalStringMaxSize = 0.0
     
-    
     static var themes = [ThemePalette, ThemeBlue, ThemeVerde]
 
+    // :TODO: load from config
     static var theme = 0
     static var itemsSpacing = 1.0
     

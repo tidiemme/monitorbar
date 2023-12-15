@@ -17,7 +17,6 @@ class MeterClass {
     var containerWidth : Double
     
     init() {
-        // minimum width
         minContainerWidth = (2.0 * MenuBarSettings.spacing)
                           + (2.0 * MenuBarSettings.arrowWidth)
         containerWidth = minContainerWidth

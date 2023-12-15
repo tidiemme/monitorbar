@@ -29,6 +29,7 @@ struct Color {
     static let verde = [217.0, 255.0, 8.0, transparency]
     
     static let black = [0.0, 0.0, 0.0, transparency]
+    static let grey = [33.0, 33.0,33.0, transparency]
     static let white = [255.0, 255.0, 255.0, transparency]
 }
 
@@ -53,9 +54,9 @@ var ThemeVerde = [Color.verde
                  ,Color.verde
                  ,Color.verde]
 
-// :TODO: manage this better
 //var ThemeTextColor = Color.black
 var ThemeTextColor = Color.white
+//var ThemeTextColor = Color.grey
 
 struct StringAttribute {
     static let normal = [

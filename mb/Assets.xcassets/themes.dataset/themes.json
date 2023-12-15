@@ -1,0 +1,60 @@
+{
+    colors : [
+        { color: "purple", value: [142.0,  68.0, 173.0]},
+        { color: "blue", value: [ 41.0, 128.0, 185.0]},
+        { color: "green", value: [ 39.0, 174.0,  96.0]},
+        { color: "punpkin", value: [211.0,  84.0,   0.0]},
+        { color: "orange", value: [229.0, 142.0,  38.0]},
+        { color: "pomegranate", value: [192.0,  57.0,  43.0]},
+        { color: "blue1", value: [  7.0, 200.0, 249.0]},
+        { color: "blue2", value: [  9.0, 166.0, 243.0]},
+        { color: "blue3", value: [ 10.0, 133.0, 237.0]},
+        { color: "blue4", value: [ 12.0,  99.0, 231.0]},
+        { color: "blue5", value: [ 13.0,  82.0, 228.0]},
+        { color: "blue6", value: [ 13.0,  65.0, 225.0]},
+        { color: "verde", value: [217.0, 255.0,   8.0]},
+        { color: "black", value: [  0.0,   0.0,   0.0]},
+        { color: "white", value: [255.0, 255.0, 255.0]}
+    ],
+    themes : [
+        {
+            name: "default",
+            colors: [
+                "pomegranate",
+                "punpkin",
+                "orange",
+                "green",
+                "blue",
+                "purple"
+            ],
+            text_color: "white",
+            transparency: 1.0
+        },
+        {
+            name: "blue",
+            colors: [
+                "blie1",
+                "blue2",
+                "blue3",
+                "blue4",
+                "blue5",
+                "blue6"
+            ],
+            text_color: "white",
+            transparency: 1.0
+        },
+        {
+            name: "verde",
+            colors: [
+                "verde",
+                "verde",
+                "verde",
+                "verde",
+                "verde",
+                "verde"
+            ],
+            text_color: "black",
+            transparency: 1.0
+        }
+    ]
+}

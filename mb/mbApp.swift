@@ -5,6 +5,8 @@
 //------------------------------------------------------------------------------
 
 import SwiftUI
+import AppKit
+import CoreLocation
 
 @main
 struct mbApp: App {
@@ -16,21 +18,30 @@ struct mbApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDelegate {
     static let updateInterval : Double = 2.0
     static let menuBar = MenuBar()
     
     //private let popover = NSPopover.init()
     private var timer: RepeatingTimer!
     private let contentView = ContentView()
+    private var locationManager = CLLocationManager()
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        
         // Set the SwiftUI's ContentView to the Popover's ContentViewController
         //popover.behavior = .transient
         //popover.animates = false
         //popover.contentViewController = NSViewController()
         //popover.contentViewController?.view = NSHostingView(rootView: contentView)
+        
+        // :TODO: load config/colors and themes from files
+        //let asset = NSDataAsset(name: "Config", bundle: Bundle.main)
+        //let jsonW = try? JSONSerialization.jsonObject(with: asset!.data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: String]
+        //if let json = jsonW {
+        //    if let theme = json["theme"] {
+        //        print(theme)
+        //    }
+        //}
         
         AppDelegate.menuBar.initialise()
         
@@ -50,6 +61,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSWorkspace.willSleepNotification,
             object: nil
         )
+        
+        if locationManager.authorizationStatus == .authorizedAlways {
+            locationManager.delegate = self
+        } else {
+            locationManager.requestAlwaysAuthorization()
+        }
     }
     
     func buildMenu() {
@@ -92,6 +109,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(mode, forKey: "Mode")
         AppDelegate.menuBar.reset()
         AppDelegate.menuBar.update()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
     }
     
     /*

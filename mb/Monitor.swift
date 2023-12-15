@@ -201,16 +201,23 @@ class Monitor {
         guard let firstAddr = ifaddr else { return address }
 
         for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
-            let flags = Int32(ptr.pointee.ifa_flags)
-            let addr = ptr.pointee.ifa_addr.pointee
+            let interfaceP = ptr.pointee
+            let flags = Int32(interfaceP.ifa_flags)
+            let addr = interfaceP.ifa_addr.pointee
 
             if (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) {
                 if addr.sa_family == UInt8(AF_INET) { //|| addr.sa_family == UInt8(AF_INET6) {
                     var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    let interfaceName =  String.init(cString: &ptr.pointee.ifa_name.pointee)
-                    if (getnameinfo(ptr.pointee.ifa_addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),
-                                    nil, socklen_t(0), NI_NUMERICHOST) == 0) {
-                        if (ptr.pointee.ifa_addr != nil && interfaceName == interface) {
+                    let interfaceName =  String(cString: interfaceP.ifa_name)
+                    if (getnameinfo(
+                            interfaceP.ifa_addr,
+                            socklen_t(addr.sa_len),
+                            &hostname,
+                            socklen_t(hostname.count),
+                            nil,
+                            socklen_t(0),
+                            NI_NUMERICHOST) == 0) {
+                        if (interfaceP.ifa_addr != nil && interfaceName == interface) {
                             address = String(cString: hostname)
                         }
                     }

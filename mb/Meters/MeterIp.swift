@@ -7,6 +7,8 @@
 import Foundation
 import SwiftUI
 import CoreWLAN
+import NetworkExtension
+import CoreLocation
 
 class MeterIp  : Meter {
     private var ip : String
@@ -14,51 +16,45 @@ class MeterIp  : Meter {
     private var signal : Int
     private var textIp : NSMutableAttributedString
     private var textWifi : NSMutableAttributedString
-    private var currentInterface : CWInterface
-    private var networks: Set<CWNetwork> = []
     
     override init() {
         ip = "127.0.0.1"
-        wifi = "-"
+        wifi = "---"
         signal = 0
         textIp = NSMutableAttributedString(string: ip
                                           ,attributes: StringAttribute.small)
         textWifi = NSMutableAttributedString(string: wifi
-                                          ,attributes: StringAttribute.small)
-        currentInterface = CWInterface()
+                                            ,attributes: StringAttribute.small)
         super.init()
         minContainerWidth += MenuBarSettings.netIpIconWidth
     }
-    
+
     func update(_ monitor : Monitor) {
         
-        if let defaultInterface = CWWiFiClient.shared().interface() {
-            currentInterface = defaultInterface
-            if let sid = currentInterface.ssid() {
+        let defaultInterface : CWInterface? = CWWiFiClient.shared().interface()
+        if defaultInterface != nil {
+            if let sid = defaultInterface?.ssid() {
                 wifi = sid
             } else {
                 wifi = "-"
             }
         }
-        let rssi = currentInterface.rssiValue()
-        if (rssi > -50) {
+        textWifi.mutableString.setString(wifi)
+        
+        ip = monitor.getIp(monitor.currentNetworkInterface())
+        textIp.mutableString.setString(ip)
+        
+        let rssi = defaultInterface?.rssiValue()
+        if (rssi ?? 1 > -50) {
             signal = 3
-        } else if (rssi > -70) {
+        } else if (rssi ?? 1 > -70) {
             signal = 2
-        } else if (rssi > -90) {
+        } else if (rssi ?? 1 > -90) {
             signal = 1
         } else {
             signal = 0
         }
 
-        //let interface = monitor.currentNetworkInterface()
-        ip = monitor.getIp(currentInterface.interfaceName!)
-        if ip == "" {
-            ip = "-"
-        }
-        textIp.mutableString.setString(ip)
-        textWifi.mutableString.setString(wifi)
-        
         containerWidth = minContainerWidth
         if (MenuBarSettings.mode == MenuBarSettings.Mode.extra.rawValue) {
             containerWidth += MenuBarSettings.spacing + Double(max(textIp.size().width,textWifi.size().width))
@@ -81,3 +77,4 @@ class MeterIp  : Meter {
         }
     }
 }
+

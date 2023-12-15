@@ -6,6 +6,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 class MenuBar {
     var statusItem: NSStatusItem!
