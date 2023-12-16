@@ -17,23 +17,26 @@ class MeterNetwork  : Meter {
     private var textDown : NSMutableAttributedString
     private var textSize : Double
     
+    #if !DYN_SIZE
+    private let textSizeFixed : Double = 40.0
+    #endif
+    
     override init() {
         upBandwidth = (value: 0.0, unit: ByteUnit.Byte)
         downBandwidth = (value: 0.0, unit: ByteUnit.Byte)
-        
-        textUp = NSMutableAttributedString(string: String(format: "000 MM/s")
-                                          ,attributes: StringAttribute.small)
-        textDown = NSMutableAttributedString(string: String(format: "000 MM/s")
-                                            ,attributes: StringAttribute.small)
-        textSize = Double(textDown.size().width)
-        
+        textUp = NSMutableAttributedString(string: String(format: "0 MB/s"), attributes: StringAttribute.small)
+        textDown = NSMutableAttributedString(string: String(format: "0 MB/s"), attributes: StringAttribute.small)
+        #if DYN_SIZE
+        textSize = Double(textUp.size().width)
+        #else
+        textSize = textSizeFixed
+        #endif
         super.init()
-        
         minContainerWidth += MenuBarSettings.netIconWidth
         if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
-            minContainerWidth += MenuBarSettings.spacing + textSize
+            minContainerWidth += MenuBarSettings.spacing
         }
-        containerWidth = minContainerWidth
+        containerWidth = minContainerWidth + textSize
     }
     
     func update(_ monitor : Monitor) {
@@ -51,8 +54,14 @@ class MeterNetwork  : Meter {
         downBandwidth = convertToCorrectUnit(bytes: downBytes / UInt64(AppDelegate.updateInterval))
         lastTotalTransmittedBytes = transmittedBytes
         
-        textUp.mutableString.setString(String(format: "%.0f ", upBandwidth.value) + upBandwidth.unit.rawValue + "/s")
-        textDown.mutableString.setString(String(format: "%.0f ", downBandwidth.value) + downBandwidth.unit.rawValue + "/s")
+        let tU = String(format: "%.0f ", upBandwidth.value) + upBandwidth.unit.rawValue + "/s"
+        let tD = String(format: "%.0f ", downBandwidth.value) + downBandwidth.unit.rawValue + "/s"
+        textUp.mutableString.setString(tU)
+        textDown.mutableString.setString(tD)
+        #if DYN_SIZE
+        textSize = Double(max(textUp.size().width,textDown.size().width))
+        containerWidth = minContainerWidth + textSize
+        #endif
     }
     
     func draw(_ pos : Double, _ color : [Double]) {
@@ -69,7 +78,7 @@ class MeterNetwork  : Meter {
         upIcon.line(to: CGPoint(x: currentPos + MenuBarSettings.netIconWidth, y: 10.0))
         upIcon.line(to: CGPoint(x: currentPos + (MenuBarSettings.netIconWidth / 2.0), y: 16.0))
         upIcon.line(to: CGPoint(x: currentPos, y: 10.0))
-        if (upBandwidth.value > downBandwidth.value) {
+        if (upBandwidth.value > 0.0) {
             NSColor.white.set()
         } else {
             colorDark.set()
@@ -80,7 +89,7 @@ class MeterNetwork  : Meter {
         downIcon.line(to: CGPoint(x: currentPos + MenuBarSettings.netIconWidth, y: 8.0))
         downIcon.line(to: CGPoint(x: currentPos + (MenuBarSettings.netIconWidth / 2.0), y: 2.0))
         downIcon.line(to: CGPoint(x: currentPos, y: 8.0))
-        if (downBandwidth.value > upBandwidth.value) {
+        if (downBandwidth.value > 0.0) {
             NSColor.white.set()
         } else {
             colorDark.set()
