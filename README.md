@@ -17,4 +17,4 @@ Here's a screen of all three together
 ![img](https://github.com/tidiemme/monitorbar/blob/main/screenshot.png)
 
 ## Supported system:
- - BigSur 11.1 on Apple silicon and Intel. 
+ - Somona 14.1.2 on Apple silicon and Intel. 
