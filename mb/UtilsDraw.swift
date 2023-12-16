@@ -133,6 +133,7 @@ func drawCircleIcon(_ pos : Double
 func drawWifiIcon(_ pos : Double
                  ,_ strength : Int
                  ,_ color : NSColor) {
+    
     if ( strength == 3) {
         NSColor.white.setStroke()
     } else {
@@ -140,16 +141,16 @@ func drawWifiIcon(_ pos : Double
     }
     
     let one = NSBezierPath()
-    one.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 5.5)
-                 ,radius: 9.0
-                 ,startAngle: 30
-                 ,endAngle: 150
+    one.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 5.1)
+                 ,radius: 9.1
+                 ,startAngle: 38
+                 ,endAngle: 142
                  ,clockwise: false)
     // not sure why I have to do this if stoke color is not white the width seems different
     if ( strength > 2) {
-        one.lineWidth = 2
+        one.lineWidth = 2.3
     } else {
-        one.lineWidth = 3
+        one.lineWidth = 2.6
     }
     one.stroke()
     
@@ -158,15 +159,15 @@ func drawWifiIcon(_ pos : Double
     }
     
     let two = NSBezierPath()
-    two.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 5.5)
-                 ,radius: 5.0
-                 ,startAngle: 30
-                 ,endAngle: 150
+    two.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 4.8)
+                 ,radius: 5.5
+                 ,startAngle: 39.0
+                 ,endAngle: 141
                  ,clockwise: false)
     if ( strength > 1) {
-        two.lineWidth = 2
+        two.lineWidth = 2.2
     } else {
-        two.lineWidth = 3
+        two.lineWidth = 2.4
     }
     two.stroke()
     
@@ -174,15 +175,20 @@ func drawWifiIcon(_ pos : Double
         NSColor.white.setStroke()
     }
     
+    if ( strength == 1) {
+        NSColor.white.setStroke()
+    }
+    
     let three = NSBezierPath()
-    three.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 5.5)
-                   ,radius: 1.0
-                   ,startAngle: 0
-                   ,endAngle: 360)
-    if ( strength > 0) {
-        three.lineWidth = 2
+    three.appendArc(withCenter: CGPoint(x: pos + 9.0, y: 4.1)
+                 ,radius: 2.0
+                 ,startAngle: 43
+                 ,endAngle: 137
+                 ,clockwise: false)
+    if ( strength > 1) {
+        three.lineWidth = 3.3
     } else {
-        three.lineWidth = 3
+        three.lineWidth = 2.7
     }
     three.stroke()
 }
