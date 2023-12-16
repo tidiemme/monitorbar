@@ -19,7 +19,7 @@ class MeterIp  : Meter {
     
     override init() {
         ip = "127.0.0.1"
-        wifi = "---"
+        wifi = "Wi-Fi"
         signal = 0
         textIp = NSMutableAttributedString(string: ip
                                           ,attributes: StringAttribute.small)
@@ -36,7 +36,7 @@ class MeterIp  : Meter {
             if let sid = defaultInterface?.ssid() {
                 wifi = sid
             } else {
-                wifi = "-"
+                wifi = "Wi-Fi"
             }
         }
         textWifi.mutableString.setString(wifi)

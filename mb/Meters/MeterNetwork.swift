@@ -35,8 +35,10 @@ class MeterNetwork  : Meter {
         minContainerWidth += MenuBarSettings.netIconWidth
         if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
             minContainerWidth += MenuBarSettings.spacing
+            containerWidth = minContainerWidth + textSize
+        } else {
+            containerWidth = minContainerWidth
         }
-        containerWidth = minContainerWidth + textSize
     }
     
     func update(_ monitor : Monitor) {
@@ -58,10 +60,12 @@ class MeterNetwork  : Meter {
         let tD = String(format: "%.0f ", downBandwidth.value) + downBandwidth.unit.rawValue + "/s"
         textUp.mutableString.setString(tU)
         textDown.mutableString.setString(tD)
-        #if DYN_SIZE
-        textSize = Double(max(textUp.size().width,textDown.size().width))
-        containerWidth = minContainerWidth + textSize
-        #endif
+        if (MenuBarSettings.mode != MenuBarSettings.Mode.compact.rawValue) {
+            #if DYN_SIZE
+            textSize = Double(max(textUp.size().width,textDown.size().width))
+            containerWidth = minContainerWidth + textSize
+            #endif
+        }
     }
     
     func draw(_ pos : Double, _ color : [Double]) {
